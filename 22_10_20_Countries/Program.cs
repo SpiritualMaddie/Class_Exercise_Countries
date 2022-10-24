@@ -8,6 +8,10 @@ namespace _22_10_20_Countries
     {
         static void Main(string[] args)
         {
+            CountryCodesMethod();
+        }
+        public static void CountryCodesMethod()
+        {
             Country C1 = new Country("Sweden", "swe", "Stockholm");
             Country C2 = new Country("Canada", "can", "Ottawa");
             Country C3 = new Country("Norge", "Nor", "Oslo");
@@ -19,59 +23,54 @@ namespace _22_10_20_Countries
                 C1, C2, C3, C4, C5
             };
 
-            CountryCodesMethod();
-
-            void CountryCodesMethod()
+            bool run = true;
+            while (run)
             {
-                bool run = true;
-                while (run)
-                {
-                    Console.WriteLine("Write a country code: ");
-                    string input = Console.ReadLine().ToUpper();
+                Console.WriteLine("Write a country code: ");
+                string input = Console.ReadLine().ToUpper();
 
-                    foreach (var country in countries)
+                foreach (var country in countries)
+                {
+                    Console.Clear();
+                    if (input == country.Code)
                     {
-                        Console.Clear();
-                        if (input == country.Code)
-                        {
-                            Console.WriteLine(country.Name + " " + country.Capital);
-                            break;
-                        }
-                        Console.WriteLine("Country code not valid!");
+                        Console.WriteLine(country.Name + " " + country.Capital);
+                        break;
                     }
-                    TryAgain();
+                    Console.WriteLine("Country code not valid!");
                 }
+                TryAgain();
             }
-            void TryAgain()
+        }
+        public static void TryAgain()
+        {
+            bool runCheck = true;
+            while (runCheck)
             {
-                bool runCheck = true;
-                while (runCheck)
+                Console.WriteLine("Do you want to check another country code? Y/N");
+                string cont = Console.ReadLine().ToUpper();
+                if (string.IsNullOrWhiteSpace(cont) == false)
                 {
-                    Console.WriteLine("Do you want to check another country code? Y/N");
-                    string cont = Console.ReadLine().ToUpper();
-                    if (string.IsNullOrWhiteSpace(cont) == false)
+                    switch (cont)
                     {
-                        switch (cont)
-                        {
-                            case "Y":
-                                CountryCodesMethod();
-                                Console.Clear();
-                                break;
-                            case "N":
-                                Environment.Exit(0);
-                                break;
-                            default:
-                                Console.Clear();
-                                Console.WriteLine("Invalid choice. Try again.");
-                                TryAgain();
-                                break;
-                        }
+                        case "Y":
+                            CountryCodesMethod();
+                            Console.Clear();
+                            break;
+                        case "N":
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Invalid choice. Try again.");
+                            TryAgain();
+                            break;
                     }
-                    else if (string.IsNullOrWhiteSpace(cont) == true)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Invalid choice. Try again.");
-                    }
+                }
+                else if (string.IsNullOrWhiteSpace(cont) == true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid choice. Try again.");
                 }
             }
         }
